@@ -312,23 +312,6 @@ await this.dataSource.transaction(async (manager) => {
 - Passwords never stored in plain text
 - Password field excluded from query results by default (`select: false`)
 
----
-
-### **7. Error Handling**
-
-**Consistent API Response Format:**
-```typescript
-{
-  "success": boolean,
-  "message": string,
-  "data"?: any
-}
-```
-
-**Benefits:**
-- Predictable response structure for frontend
-- Easy error handling on client side
-- Clear success/failure indication
 
 ---
 
