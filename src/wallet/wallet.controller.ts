@@ -3,6 +3,8 @@ import { WalletService } from './services/wallet.service';
 import { FundWalletDTO } from './dto/fund-wallet.dto';
 import { WalletFundingService } from './services/wallet-funding.service';
 import { Currency } from './types';
+import { FxService } from 'src/fx/fx.service';
+import { ConvertCurrencyDTO } from 'src/fx/dto/convert-currency.dto';
 
 @Controller('wallet')
 export class WalletController {
@@ -34,6 +36,21 @@ export class WalletController {
       fundDTO.currency,
       fundDTO.amount,
       fundDTO.reference,
+    );
+  }
+
+  @Post('convert')
+  async convertCurrency(
+    @Request() req,
+    @Body() convertDTO: ConvertCurrencyDTO,
+  ) {
+    const userId = '9727a199-b92c-42a7-b03b-94c3e92af258';
+
+    return await this.walletService.convert(
+      userId,
+      convertDTO.fromCurrency,
+      convertDTO.toCurrency,
+      convertDTO.amount,
     );
   }
 }

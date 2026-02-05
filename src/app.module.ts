@@ -10,6 +10,7 @@ import { WalletModule } from './wallet/wallet.module';
 import { Wallet } from './wallet/entities/wallet.entity';
 import { Transaction } from './transaction/transaction.entity';
 import { TransactionModule } from './transaction/transaction.module';
+import { FXModule } from './fx/fx.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -39,6 +40,7 @@ import { TransactionModule } from './transaction/transaction.module';
     AuthModule,
     WalletModule,
     TransactionModule,
+    FXModule,
   ],
   controllers: [AppController],
   providers: [AppService],
