@@ -159,7 +159,7 @@ If successful, you should see:
 
 ---
 
-## 🏃 Running the Application
+## Running the Application
 
 ### Development Mode (with hot-reload)
 
