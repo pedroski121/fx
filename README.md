@@ -30,7 +30,7 @@ A backend system for foreign exchange (FX) trading that enables users to registe
 
 ##  Project Schema
 
-![Project Logo](./assets/structure.png)
+![Project Logo](assets/structure.png)
 
 ##  Tech Stack
 
