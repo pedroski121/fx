@@ -28,7 +28,7 @@ import { UserModule } from './users/user.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
         entities: [User, OTP, Wallet, Transaction],
-        synchronize: configService.get('DB_SYNCHRONIZE'),
+        synchronize: configService.get('DB_SYNCHRONIZE') || false,
         logging: false,
         ssl:
           configService.get('NODE_ENV') === 'production'

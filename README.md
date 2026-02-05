@@ -30,7 +30,7 @@ A backend system for foreign exchange (FX) trading that enables users to registe
 
 ##  Project Schema
 
-![Project Logo](./assets/structure.png)
+![Project Logo](assets/structure.png)
 
 ##  Tech Stack
 
@@ -45,7 +45,7 @@ A backend system for foreign exchange (FX) trading that enables users to registe
 
 ---
 
-## 📦 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -73,7 +73,7 @@ npm install
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### 1. Create Environment File
 
