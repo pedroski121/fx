@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FXResponsePairConversion, FXResponseRates } from './types';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Currency } from 'src/wallet/types';
+import { APIResponse } from 'src/common/responses/api-response';
 
 @Injectable()
 export class FxService {
@@ -73,7 +74,9 @@ export class FxService {
     };
   }
 
-  async getRates(baseCurrency: string): Promise<Record<string, number>> {
+  async getRates(
+    baseCurrency: string,
+  ): Promise<APIResponse<Record<string, number>>> {
     try {
       const response = await axios.get<FXResponseRates>(
         `${this.apiUrl}/${this.apiKey}/latest/${baseCurrency}`,
@@ -94,11 +97,11 @@ export class FxService {
         }
       }
 
-      return filteredRates;
+      return APIResponse.success(filteredRates);
     } catch (e) {
       console.log(e);
       throw new HttpException(
-        'Unable to fetch exchange rates',
+        APIResponse.failure('Unable to fetch exchange rates'),
         HttpStatus.SERVICE_UNAVAILABLE,
       );
     }

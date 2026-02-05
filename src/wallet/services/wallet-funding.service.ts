@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { WalletService } from './wallet.service';
 import {
@@ -27,7 +27,18 @@ export class WalletFundingService {
     amount: number,
     reference?: string,
   ) {
-    if (amount <= 0) return APIResponse.failure('Amount must be positive');
+    if (amount <= 0) {
+      throw new BadRequestException(
+        APIResponse.failure('Amount must be positive'),
+      );
+    }
+
+    // Check if amount is decimal
+    if (!Number.isInteger(amount)) {
+      throw new BadRequestException(
+        APIResponse.failure('Amount must be whole number'),
+      );
+    }
 
     const wallet = await this.walletService.findOrCreateWallet(
       userId,
@@ -75,7 +86,9 @@ export class WalletFundingService {
       await this.transactionRepository.save(failedTx);
 
       console.log(e);
-      return APIResponse.failure('transaction could not be completed');
+      throw new BadRequestException(
+        APIResponse.failure('transaction could not be completed'),
+      );
     }
   }
 }

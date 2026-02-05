@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { User } from './users/user.entity';
 import { OTP } from './auth/entities/otp.entity';
@@ -29,8 +28,8 @@ import { UserModule } from './users/user.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
         entities: [User, OTP, Wallet, Transaction],
-        synchronize: true,
-        logging: true,
+        synchronize: configService.get('DB_SYNCHRONIZE'),
+        logging: false,
         ssl:
           configService.get('NODE_ENV') === 'production'
             ? { rejectUnauthorized: false }
@@ -44,7 +43,6 @@ import { UserModule } from './users/user.module';
     TransactionModule,
     FXModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
