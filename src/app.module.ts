@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppService } from './app.service';
 import { User } from './users/user.entity';
 import { OTP } from './auth/entities/otp.entity';
 import { AuthModule } from './auth/auth.module';
@@ -43,6 +42,6 @@ import { UserModule } from './users/user.module';
     TransactionModule,
     FXModule,
   ],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
