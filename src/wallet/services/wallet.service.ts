@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { Wallet } from '../entities/wallet.entity';
 import { Currency } from '../types';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/user.entity';
 import { APIResponse } from 'src/common/responses/api-response';
 import { FxService } from 'src/fx/fx.service';
 import {

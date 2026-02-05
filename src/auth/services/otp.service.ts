@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { OTP } from '../entities/otp.entity';
 import { APIResponse } from 'src/common/responses/api-response';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/user.entity';
 
 @Injectable()
 export class OtpService {
@@ -35,16 +39,16 @@ export class OtpService {
     });
 
     if (!otpRecord) {
-      return APIResponse.failure('Invalid OTP');
+      throw new BadRequestException(APIResponse.failure('Invalid OTP'));
     }
 
     if (otpRecord.expiresAt < new Date()) {
       await this.otpRepository.delete(otpRecord.id);
-      return APIResponse.failure('OTP expired');
+      throw new UnauthorizedException(APIResponse.failure('OTP expired'));
     }
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
-      return APIResponse.failure('User not found');
+      throw new UnauthorizedException(APIResponse.failure('User not found'));
     }
 
     otpRecord.isUsed = true;

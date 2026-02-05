@@ -1,6 +1,6 @@
 # FX Trading App - Backend API
 
-A robust backend system for foreign exchange (FX) trading that enables users to register, verify their email, manage multi-currency wallets, and perform real-time currency conversions using live exchange rates.
+A backend system for foreign exchange (FX) trading that enables users to register, verify their email, manage multi-currency wallets, and perform real-time currency conversions using live exchange rates.
 
 ##  Table of Contents
 
@@ -23,12 +23,12 @@ A robust backend system for foreign exchange (FX) trading that enables users to 
 ##  Features
 
 - **User Authentication**
-  - Email-based registration with OTP verification
+  - Email based registration with OTP verification
   - JWT-based authentication
-  - Secure password hashing with bcrypt
+  - Protected endpoints - login required
 
 - **Multi-Currency Wallet System**
-  - Support for multiple currencies (NGN, USD, EUR, GBP, etc.)
+  - Support for multiple currencies (NGN, USD, EUR, GBP)
   - Automatic wallet creation per currency
   - Real-time balance tracking
 
@@ -45,7 +45,11 @@ A robust backend system for foreign exchange (FX) trading that enables users to 
 
 ---
 
-## 🛠 Tech Stack
+##  Project Schema
+
+![Project Logo](./assets/structure.png)
+
+##  Tech Stack
 
 - **Backend Framework:** NestJS (Node.js)
 - **ORM:** TypeORM
@@ -212,7 +216,7 @@ The API will be available at: `http://localhost:3000`
 
 ---
 
-## 📚 API Documentation
+## API Documentation
 
 ### Base URL
 ```
@@ -227,7 +231,7 @@ Authorization: Bearer <your_jwt_token>
 
 ---
 
-### 🔐 Authentication Endpoints
+### Authentication Endpoints
 
 #### **Register User**
 ```http

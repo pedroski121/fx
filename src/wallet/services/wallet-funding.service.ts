@@ -6,7 +6,7 @@ import {
   TransactionStatus,
   TransactionType,
 } from 'src/transaction/transaction.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/user.entity';
 import { APIResponse } from 'src/common/responses/api-response';
 import { Currency } from '../types';
 import { InjectRepository } from '@nestjs/typeorm';

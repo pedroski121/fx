@@ -1,12 +1,15 @@
-import { Controller, Body, Request, Post, Get, Param } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, Req } from '@nestjs/common';
 import { WalletService } from './services/wallet.service';
 import { FundWalletDTO } from './dto/fund-wallet.dto';
 import { WalletFundingService } from './services/wallet-funding.service';
 import { Currency } from './types';
-import { FxService } from 'src/fx/fx.service';
 import { ConvertCurrencyDTO } from 'src/fx/dto/convert-currency.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import type { RequestWithUser } from 'src/auth/interfaces/request-with-user.interface';
 
 @Controller('wallet')
+@UseGuards(JwtAuthGuard)
 export class WalletController {
   constructor(
     private walletService: WalletService,
@@ -14,24 +17,28 @@ export class WalletController {
   ) {}
 
   @Get()
-  async getWallets() {
-    // const userId = req.user.id;
-    const userId = '9727a199-b92c-42a7-b03b-94c3e92af258';
-    return await this.walletService.getUserWallets(userId);
+  async getWallets(@Req() req: RequestWithUser) {
+    const userId = req.user.id;
+    return this.walletService.getUserWallets(userId);
   }
 
   @Get(':currency')
-  async getWallet(@Request() req, @Param('currency') currency: Currency) {
-    // const userId = req.user.id;
-    const userId = '9727a199-b92c-42a7-b03b-94c3e92af258';
-    return await this.walletService.getUserWallet(userId, currency);
+  async getWallet(
+    @Req() req: RequestWithUser,
+    @Param('currency') currency: Currency,
+  ) {
+    const userId = req.user.id;
+    return this.walletService.getUserWallet(userId, currency);
   }
 
   @Post('fund')
-  async fundWallet(@Request() req, @Body() fundDTO: FundWalletDTO) {
-    const userId = '9727a199-b92c-42a7-b03b-94c3e92af258';
+  async fundWallet(
+    @Req() req: RequestWithUser,
+    @Body() fundDTO: FundWalletDTO,
+  ) {
+    const userId = req.user.id;
 
-    return await this.walletFundingService.fund(
+    return this.walletFundingService.fund(
       userId,
       fundDTO.currency,
       fundDTO.amount,
@@ -41,12 +48,12 @@ export class WalletController {
 
   @Post('convert')
   async convertCurrency(
-    @Request() req,
+    @Req() req: RequestWithUser,
     @Body() convertDTO: ConvertCurrencyDTO,
   ) {
-    const userId = '9727a199-b92c-42a7-b03b-94c3e92af258';
+    const userId = req.user.id;
 
-    return await this.walletService.convert(
+    return this.walletService.convert(
       userId,
       convertDTO.fromCurrency,
       convertDTO.toCurrency,
