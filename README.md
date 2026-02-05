@@ -93,13 +93,13 @@ PORT = 3000
 
 
 # Database configuration
-DB_HOST = localhost
-DB_USERNAME = mac
-DB_PASSWORD =1234
-DB_DATABASE = fx
-DB_SYNCHRONIZE =true
-NODE_ENV =development
-DB_PORT = 5432
+DB_HOST = <db_host>
+DB_USERNAME = <db_username>
+DB_PASSWORD = <db_password>
+DB_DATABASE = <db_database_name>
+DB_SYNCHRONIZE = <boolean>
+NODE_ENV = development | production
+DB_PORT = <db_port>
 
 # GMAIL APP PASSWORD
 GMAIL_APP_PASSWORD= <gmail_temporary_password>
@@ -111,7 +111,7 @@ FX_API_KEY =<fx_api_key>
 
 # JWT
 
-JWT_SECRET="superSecretKey123"
+JWT_SECRET=<jwt_secret>
 ```
 
 ### 3. Get API Keys
@@ -353,7 +353,7 @@ await this.dataSource.transaction(async (manager) => {
 ---
 
 
-## 📈 Scalability Considerations
+## Scalability Considerations
 
 ### **How This System Can Scale to Millions of Users**
 
